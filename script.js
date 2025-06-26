@@ -18,7 +18,7 @@ function removeProductFromShoppingCart(event) {
   const productPrice = parseFloat(productItem.dataset.price);  // Extract price from data attribute
 
   // Update the total price by subtracting the product's price
-  updateTotalPrice(-productPrice);
+  updateTotalPrice(productPrice);
 
   // Remove the product item from the cart
   productItem.remove();
@@ -26,30 +26,41 @@ function removeProductFromShoppingCart(event) {
 
 // Task 1: Add Products to Shopping Cart
 function addProductToShoppingCart() {
-  const productName = nameOfProductItem.value.trim();
-  const productPrice = parseFloat(priceOfProductItem.value);
+ // Get the product name and price from the input fields
+  const productName = nameOfProductItem.value.trim();  // Remove leading/trailing spaces from the name
+  const productPrice = parseFloat(priceOfProductItem.value);  // Convert the price to a number
 
-  if (!productName || isNaN(productPrice) || productPrice < 0) return;  // Validation
+  // Validation: Check if the name is empty or if the price is invalid (NaN or negative)
+  if (!productName || isNaN(productPrice) || productPrice < 0) return;  // If invalid, exit the function
 
+  // Create a new list item for the cart
   const listOfProductsInShoppingCart = document.createElement('li');
-  listOfProductsInShoppingCart.className = 'cart-item';
-  listOfProductsInShoppingCart.dataset.price = productPrice;
+  listOfProductsInShoppingCart.className = 'cart-item';  // Assign a class to the item for styling
+  listOfProductsInShoppingCart.dataset.price = productPrice;  // Store the product price in the dataset for later use
 
+  // Create a span element to display the product name and price
   const productDescription = document.createElement('span');
-  productDescription.textContent = `${productName} - $${productPrice.toFixed(2)}`;
+  productDescription.textContent = `${productName} - $${productPrice.toFixed(2)}`;  // Format the price to two decimal places
 
+  // Create a button to remove the product from the cart
   const removeProductButton = document.createElement('button');
-  removeProductButton.textContent = 'Remove';
-  removeProductButton.addEventListener('click', removeProductFromShoppingCart);
+  removeProductButton.textContent = 'Remove';  // Button text
+  removeProductButton.addEventListener('click', removeProductFromShoppingCart);  // Attach the event listener to remove the product
 
+  // Append the description and remove button to the list item
   listOfProductsInShoppingCart.appendChild(productDescription);
   listOfProductsInShoppingCart.appendChild(removeProductButton);
+
+  // Append the list item to the shopping cart
   productShoppingCart.appendChild(listOfProductsInShoppingCart);
 
-  updateTotalPrice(productPrice);  // Update total price after adding a product
+  // Update the total price to include the new product
+  updateTotalPrice(productPrice);
 
-  nameOfProductItem.value = '';  // Clear input fields
-  priceOfProductItem.value = '';
+  // Clear the input fields for the next product
+  nameOfProductItem.value = '';  
+  priceOfProductItem.value = ''; 
 }
 
+// Event listener for the "Add Product" button
 addProductItemToCartButton.addEventListener('click', addProductToShoppingCart);
