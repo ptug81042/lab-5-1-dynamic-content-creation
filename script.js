@@ -14,9 +14,13 @@ function updateTotalPrice(amount) {
 
 // Function to remove an item
 function removeProductFromShoppingCart(event) {
-  const productItem = event.target.closest('li');
-  const productPrice = parseFloat(productItem.dataset.price);
-  updateTotalPrice(-productPrice);  // Subtract the product's price when removed
+  const productItem = event.target.closest('li');  // Get the list item containing the product
+  const productPrice = parseFloat(productItem.dataset.price);  // Extract price from data attribute
+
+  // Update the total price by subtracting the product's price
+  updateTotalPrice(-productPrice);
+
+  // Remove the product item from the cart
   productItem.remove();
 }
 
