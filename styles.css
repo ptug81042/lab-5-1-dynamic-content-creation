@@ -17,15 +17,22 @@ body {
 
 .cart-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 10px;
+    gap: 10px;
 }
 
 .cart-item span {
-    flex: 1;
+    flex: none;
 }
 
 .cart-item button {
+    margin-left: 10px;
+}
+
+.cart-timestamp {
+    font-size: 0.85em;
+    color: #888;
     margin-left: 10px;
 }
